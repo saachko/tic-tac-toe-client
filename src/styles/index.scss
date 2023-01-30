@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/bootstrap';
+
+* {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+body {
+  margin: 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.raleway-font {
+  font-family: 'Raleway Dots', cursive;
+  font-size: 0.8rem;
+}
+
+.mb--1 {
+  margin-bottom: -10px;
+}
