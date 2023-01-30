@@ -2,21 +2,28 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 import UserData from '../utils/interfaces';
+import SetState from '../utils/types';
+
+interface LoginFormProps {
+  setCurrentUser: SetState<UserData | null>;
+  setUsers: SetState<UserData[]>;
+}
 
 type LoginInputs = {
   username: HTMLInputElement;
   room: HTMLInputElement;
 };
 
-function LoginForm() {
+function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
   const connectToWebSocket = (userData: UserData) => {
-    const ws = new WebSocket('wss://tic-tac-toe-qkp5.onrender.com');
+    const ws = new WebSocket('ws://localhost:3001/');
     ws.onopen = () => {
       ws.send(JSON.stringify(userData));
+      setCurrentUser(userData);
     };
 
     ws.onmessage = (event) => {
-      console.log(JSON.parse(event.data));
+      setUsers(JSON.parse(event.data));
     };
   };
 
