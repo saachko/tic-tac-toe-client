@@ -10,7 +10,7 @@ type LoginInputs = {
 
 function LoginForm() {
   const connectToWebSocket = (userData: UserData) => {
-    const ws = new WebSocket('ws://localhost:3001');
+    const ws = new WebSocket('wss://tic-tac-toe-qkp5.onrender.com');
     ws.onopen = () => {
       ws.send(JSON.stringify(userData));
     };
