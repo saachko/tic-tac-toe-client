@@ -15,7 +15,6 @@ function StartPage({ setCurrentUser, setUsers, users }: StartPageProps) {
   if (users.length) {
     return <Navigate to="/game" />;
   }
-
   return (
     <div>
       <p className="mb--1 text-center">{`Let's play`}</p>

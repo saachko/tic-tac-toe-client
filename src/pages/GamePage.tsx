@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import UserData from '../utils/interfaces';
 
@@ -24,6 +25,9 @@ function GamePage({ currentUser, users }: GamePageProps) {
     }
   }, [users]);
 
+  if (!users.length) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="text-center">
       <h1 className="mb--1 text-primary">Room {currentUser?.room}</h1>
