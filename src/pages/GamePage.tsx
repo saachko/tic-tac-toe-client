@@ -14,7 +14,9 @@ function GamePage({ currentUser, users }: GamePageProps) {
 
   useEffect(() => {
     if (currentUser) {
-      const secondUser = users.find((user) => user.room === currentUser.room);
+      const secondUser = users.find(
+        (user) => user.room === currentUser.room && user.id !== currentUser.id
+      );
       if (secondUser) {
         setUser1(secondUser.username);
         setUser2(currentUser.username);

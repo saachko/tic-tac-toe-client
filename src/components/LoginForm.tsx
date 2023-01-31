@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { v4 } from 'uuid';
 
 import UserData from '../utils/interfaces';
 import SetState from '../utils/types';
@@ -34,6 +35,7 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
     const form = event.currentTarget;
     const { username, room } = form;
     connectToWebSocket({
+      id: v4(),
       username: username.value,
       room: room.value,
     });
