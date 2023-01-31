@@ -22,7 +22,10 @@ function App() {
           />
         }
       />
-      <Route path="/game" element={<GamePage />} />
+      <Route
+        path="/game"
+        element={<GamePage currentUser={currentUser} users={users} />}
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

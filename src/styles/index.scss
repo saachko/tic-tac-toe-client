@@ -17,6 +17,11 @@ body {
   justify-content: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  h1 {
+    font-weight: bold;
+    font-size: 3.3rem;
+  }
 }
 
 .raleway-font {
