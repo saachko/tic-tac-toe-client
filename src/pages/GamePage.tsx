@@ -9,21 +9,33 @@ interface GamePageProps {
 }
 
 function GamePage({ currentUser, users }: GamePageProps) {
-  const [user1, setUser1] = useState('');
-  const [user2, setUser2] = useState('');
+  const [player1, setPlayer1] = useState('');
+  const [player2, setPlayer2] = useState('');
+
+  const findOpponent = (currentPlayer: UserData) => {
+    const secondUser = users.find(
+      (user) => user.room === currentPlayer.room && user.id !== currentPlayer.id
+    );
+    return secondUser;
+  };
 
   useEffect(() => {
     if (currentUser) {
-      const secondUser = users.find(
-        (user) => user.room === currentUser.room && user.id !== currentUser.id
-      );
-      if (secondUser) {
-        setUser1(secondUser.username);
-        setUser2(currentUser.username);
+      const secondPlayer = findOpponent(currentUser);
+      if (secondPlayer) {
+        setPlayer1(secondPlayer.username);
+        setPlayer2(currentUser.username);
       } else {
-        setUser1(currentUser.username);
-        setUser2('...');
+        setPlayer1(currentUser.username);
+        setPlayer2('...');
       }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentUser && player2 === '...') {
+      const secondPlayer = findOpponent(currentUser);
+      if (secondPlayer) setPlayer2(secondPlayer.username);
     }
   }, [users]);
 
@@ -34,7 +46,7 @@ function GamePage({ currentUser, users }: GamePageProps) {
     <div className="text-center">
       <h1 className="mb--1 text-primary">Room {currentUser?.room}</h1>
       <p>
-        {user1} vs {user2}
+        {player1} vs {player2}
       </p>
     </div>
   );
