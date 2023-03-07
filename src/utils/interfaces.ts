@@ -18,6 +18,7 @@ interface MoveData {
 interface SocketRawData {
   type: DataType;
   users: UserSocketData[];
+  opponentClientId: string;
   moves: number[];
 }
 
