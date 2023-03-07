@@ -3,12 +3,12 @@ import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
 
-import { SocketRawData, UserSocketData } from 'utils/interfaces';
+import { SocketRawData, UserData } from 'utils/interfaces';
 
 interface GameTableProps {
-  currentUser: UserSocketData | null;
-  player1: UserSocketData | null;
-  player2: UserSocketData | null;
+  currentUser: UserData | null;
+  player1: UserData | null;
+  player2: UserData | null;
 }
 
 function GameTable({ currentUser, player1, player2 }: GameTableProps) {
@@ -17,18 +17,15 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   const connectToWebSocket = (movesData: number[]) => {
     const ws = new WebSocket('ws://localhost:3001/');
     ws.onopen = () => {
-      const opponentClientId =
-        player1?.id === currentUser?.id ? player2?.clientId : player1?.clientId;
-      const data = { type: 'move', move: movesData, opponentClientId };
+      const opponentId =
+        player1?.id === currentUser?.id ? player2?.id : player1?.id;
+      const data = { type: 'move', move: movesData, opponentId };
       ws.send(JSON.stringify(data));
     };
 
     ws.onmessage = (event) => {
       const rawData: SocketRawData = JSON.parse(event.data);
-      if (
-        rawData.type === 'move' &&
-        rawData.opponentClientId === currentUser?.clientId
-      ) {
+      if (rawData.type === 'move' && rawData.opponentId === currentUser?.id) {
         setMoves(rawData.moves);
       }
     };

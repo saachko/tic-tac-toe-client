@@ -6,10 +6,6 @@ interface UserData {
   room: string;
 }
 
-interface UserSocketData extends UserData {
-  clientId: string;
-}
-
 interface MoveData {
   clientsId: string;
   moves: number[];
@@ -17,9 +13,9 @@ interface MoveData {
 
 interface SocketRawData {
   type: DataType;
-  users: UserSocketData[];
-  opponentClientId: string;
+  users: UserData[];
   moves: number[];
+  opponentId: string;
 }
 
-export type { UserData, UserSocketData, MoveData, SocketRawData };
+export type { UserData, MoveData, SocketRawData };

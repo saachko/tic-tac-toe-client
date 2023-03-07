@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import GameTable from '../components/GameTable';
-import { UserSocketData } from '../utils/interfaces';
+import { UserData } from '../utils/interfaces';
 
 interface GamePageProps {
-  currentUser: UserSocketData | null;
-  users: UserSocketData[];
+  currentUser: UserData | null;
+  users: UserData[];
 }
 
 function GamePage({ currentUser, users }: GamePageProps) {
-  const [player1, setPlayer1] = useState<UserSocketData | null>(null);
-  const [player2, setPlayer2] = useState<UserSocketData | null>(null);
+  const [player1, setPlayer1] = useState<UserData | null>(null);
+  const [player2, setPlayer2] = useState<UserData | null>(null);
 
-  const findOpponent = (currentPlayer: UserSocketData) => {
+  const findOpponent = (currentPlayer: UserData) => {
     const secondUser = users.find(
       (user) => user.room === currentPlayer.room && user.id !== currentPlayer.id
     );
@@ -32,7 +32,6 @@ function GamePage({ currentUser, users }: GamePageProps) {
           id: '0',
           username: '...',
           room: currentUser.room,
-          clientId: '0',
         });
       }
     }

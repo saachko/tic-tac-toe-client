@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { v4 } from 'uuid';
 
-import { SocketRawData, UserData, UserSocketData } from '../utils/interfaces';
+import { SocketRawData, UserData } from '../utils/interfaces';
 import { SetState } from '../utils/types';
 import Loader from './Loader';
 
 interface LoginFormProps {
-  setCurrentUser: SetState<UserSocketData | null>;
-  setUsers: SetState<UserSocketData[]>;
+  setCurrentUser: SetState<UserData | null>;
+  setUsers: SetState<UserData[]>;
 }
 
 type LoginInputs = {
@@ -24,6 +24,7 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
       const data = { type: 'user', user: userData };
       ws.send(JSON.stringify(data));
       setUserLoading(true);
+      setCurrentUser(userData);
     };
 
     ws.onmessage = (event) => {
@@ -31,10 +32,6 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
       const rawData: SocketRawData = JSON.parse(event.data);
       if (rawData.type === 'user') {
         setUsers(rawData.users);
-        const currentPlayer = rawData.users.find(
-          (user) => user.id === userData.id
-        );
-        setCurrentUser(currentPlayer || null);
       }
     };
   };
