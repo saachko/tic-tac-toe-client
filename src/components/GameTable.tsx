@@ -4,6 +4,7 @@ import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
 
+import checkMoves from 'utils/functions';
 import { SocketRawData, UserData } from 'utils/interfaces';
 
 interface GameTableProps {
@@ -70,6 +71,12 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
     setMoves(newTable);
     connectToWebSocket(newTable);
   };
+
+  useEffect(() => {
+    if (checkMoves(moves)) {
+      console.log('stop');
+    }
+  }, [moves]);
 
   return (
     <>

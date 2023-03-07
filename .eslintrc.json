@@ -26,7 +26,8 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
     "no-underscore-dangle": "off",
-    "no-extraneous-dependencies": "off"
+    "no-extraneous-dependencies": "off",
+    "no-plusplus": "off"
   },
   "settings": {
     "import/resolver": {
