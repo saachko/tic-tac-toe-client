@@ -41,6 +41,12 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
         setMoves(rawData.moves);
         selectWhoMovesNext(rawData.opponentId);
       }
+      if (rawData.type === 'close') {
+        const usersList = rawData.users;
+        if (!usersList.find((user) => user.id === player1?.id || player2?.id)) {
+          document.location.reload();
+        }
+      }
     };
   };
 
