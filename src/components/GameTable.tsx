@@ -31,14 +31,11 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
     }
   };
 
-  const connectToWebSocket = (movesData: number[]) => {
+  const connectToWebSocket = (movesData: number[], opponentId?: string) => {
     const ws = new WebSocket(wssUrl);
     ws.onopen = () => {
-      const opponentId =
-        player1?.id === currentUser?.id ? player2?.id : player1?.id;
       const data = { type: 'move', move: movesData, opponentId };
       ws.send(JSON.stringify(data));
-      selectWhoMovesNext(opponentId);
     };
 
     ws.onmessage = (event) => {
@@ -78,7 +75,10 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
     const newTable = [...moves];
     newTable[index] = player1?.id === currentUser?.id ? 1 : -1;
     setMoves(newTable);
-    connectToWebSocket(newTable);
+    const opponentId =
+      player1?.id === currentUser?.id ? player2?.id : player1?.id;
+    selectWhoMovesNext(opponentId);
+    connectToWebSocket(newTable, opponentId);
   };
 
   useEffect(() => {
