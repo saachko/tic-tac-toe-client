@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { v4 } from 'uuid';
 
+import { wssUrl } from 'utils/constants';
+
 import { SocketRawData, UserData } from '../utils/interfaces';
 import { SetState } from '../utils/types';
 import Loader from './Loader';
@@ -19,7 +21,7 @@ type LoginInputs = {
 function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
   const [isUserLoading, setUserLoading] = useState(false);
   const connectToWebSocket = (userData: UserData) => {
-    const ws = new WebSocket('ws://localhost:3001/');
+    const ws = new WebSocket(wssUrl);
     ws.onopen = () => {
       const data = { type: 'user', user: userData };
       ws.send(JSON.stringify(data));

@@ -5,6 +5,7 @@ import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
 
+import { wssUrl } from 'utils/constants';
 import { checkIfMovesLeft, checkMoves } from 'utils/functions';
 import { SocketRawData, UserData } from 'utils/interfaces';
 
@@ -30,7 +31,7 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   };
 
   const connectToWebSocket = (movesData: number[]) => {
-    const ws = new WebSocket('ws://localhost:3001/');
+    const ws = new WebSocket(wssUrl);
     ws.onopen = () => {
       const opponentId =
         player1?.id === currentUser?.id ? player2?.id : player1?.id;

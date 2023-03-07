@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import { defaultUser } from 'utils/constants';
+
 import GameTable from '../components/GameTable';
 import { UserData } from '../utils/interfaces';
 
@@ -28,11 +30,7 @@ function GamePage({ currentUser, users }: GamePageProps) {
         setPlayer2(currentUser);
       } else {
         setPlayer1(currentUser);
-        setPlayer2({
-          id: '0',
-          username: '...',
-          room: currentUser.room,
-        });
+        setPlayer2({ ...defaultUser, room: currentUser.room });
       }
     }
   }, []);
