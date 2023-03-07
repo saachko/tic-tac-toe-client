@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Loader from 'components/Loader';
 
-import UserData from './utils/interfaces';
+import { UserData, UserSocketData } from './utils/interfaces';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 const GamePage = lazy(() => import('./pages/GamePage'));
@@ -11,7 +11,7 @@ const StartPage = lazy(() => import('./pages/StartPage'));
 
 function App() {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
-  const [users, setUsers] = useState<UserData[]>([]);
+  const [users, setUsers] = useState<UserSocketData[]>([]);
 
   return (
     <Suspense fallback={<Loader />}>

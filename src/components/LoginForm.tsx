@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { v4 } from 'uuid';
 
-import UserData from '../utils/interfaces';
+import { UserData, UserSocketData } from '../utils/interfaces';
 import SetState from '../utils/types';
 import Loader from './Loader';
 
 interface LoginFormProps {
   setCurrentUser: SetState<UserData | null>;
-  setUsers: SetState<UserData[]>;
+  setUsers: SetState<UserSocketData[]>;
 }
 
 type LoginInputs = {

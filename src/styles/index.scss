@@ -63,3 +63,30 @@ body {
   z-index: 1100;
   font-size: 1rem;
 }
+
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  width: 290px;
+  gap: 5px;
+
+  svg {
+    margin-top: -5px;
+    color: black;
+  }
+}
+
+.cell {
+  width: 90px;
+  height: 90px;
+  border: none;
+  transition: 0.2s all ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:disabled {
+    opacity: 1;
+  }
+}
