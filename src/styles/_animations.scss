@@ -1,0 +1,64 @@
+@keyframes lose {
+  0% {
+    background-color: darkred;
+  }
+  25% {
+    background-color: white;
+  }
+  50% {
+    background-color: red;
+  }
+  75% {
+    background-color: white;
+  }
+  100% {
+    background-color: darkred;
+  }
+}
+
+.lose {
+  animation: lose 1s linear;
+  background-color: darkred;
+}
+
+@keyframes win {
+  0% {
+    background-color: darkgreen;
+  }
+  25% {
+    background-color: white;
+  }
+  50% {
+    background-color: green;
+  }
+  75% {
+    background-color: white;
+  }
+  100% {
+    background-color: darkgreen;
+  }
+}
+
+@keyframes draw {
+  0% {
+    background-color: white;
+  }
+  100% {
+    background-color: #a2cef4;
+  }
+}
+
+.lose {
+  animation: lose 1s linear;
+  background-color: darkred;
+}
+
+.win {
+  animation: win 1s linear;
+  background-color: darkgreen;
+}
+
+.draw {
+  animation: draw 0.5s ease-out;
+  background-color: #a2cef4;
+}

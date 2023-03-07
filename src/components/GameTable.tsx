@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
@@ -100,6 +100,12 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
     }
   }, [draw]);
 
+  useLayoutEffect(() => {
+    if (winner || draw) {
+      document.documentElement.setAttribute('data-end', 'true');
+    }
+  }, [winner, draw]);
+
   return (
     <>
       <div className="table">
@@ -129,6 +135,13 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
         </div>
       </div>
       <p className="raleway-font fs-1">{message}</p>
+      <div
+        className={clsx('background', {
+          win: winner && winner.id === currentUser?.id,
+          lose: winner && winner.id !== currentUser?.id,
+          draw,
+        })}
+      />
     </>
   );
 }
