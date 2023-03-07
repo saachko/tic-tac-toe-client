@@ -49,7 +49,11 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
       }
       if (rawData.type === 'close') {
         const usersList = rawData.users;
-        if (usersList.find((user) => user.id === player1?.id || player2?.id)) {
+        if (
+          usersList.some(
+            (user) => user.id === player1?.id || user.id === player2?.id
+          )
+        ) {
           document.location.reload();
         }
       }

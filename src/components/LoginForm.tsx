@@ -25,7 +25,6 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
     ws.onopen = () => {
       const data = { type: 'user', user: userData };
       ws.send(JSON.stringify(data));
-      setUserLoading(true);
       setCurrentUser(userData);
     };
 
@@ -42,6 +41,7 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
     HTMLFormElement & LoginInputs
   > = async (event) => {
     event.preventDefault();
+    setUserLoading(true);
     const form = event.currentTarget;
     const { username, room } = form;
     connectToWebSocket({
