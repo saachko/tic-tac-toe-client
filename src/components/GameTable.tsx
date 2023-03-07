@@ -19,6 +19,7 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   const [moves, setMoves] = useState<number[]>([]);
   const [nextUser, setNextUser] = useState(player1);
   const [message, setMessage] = useState('');
+  const [messageOnEnd, setMessageOnEnd] = useState('');
   const [winner, setWinner] = useState<UserData | null>(null);
   const [draw, setDraw] = useState(false);
 
@@ -48,7 +49,7 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
       }
       if (rawData.type === 'close') {
         const usersList = rawData.users;
-        if (!usersList.find((user) => user.id === player1?.id || player2?.id)) {
+        if (usersList.find((user) => user.id === player1?.id || player2?.id)) {
           document.location.reload();
         }
       }
@@ -88,17 +89,13 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
 
   useEffect(() => {
     if (winner) {
-      setTimeout(() => {
-        setMessage(`${winner.username} wins`);
-      }, 0);
+      setMessageOnEnd(`${winner.username} wins`);
     }
   }, [winner]);
 
   useEffect(() => {
     if (draw) {
-      setTimeout(() => {
-        setMessage("It's a draw!");
-      }, 0);
+      setMessageOnEnd("It's a draw!");
     }
   }, [draw]);
 
@@ -136,7 +133,9 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
           waiting for your opponent...
         </div>
       </div>
-      <p className="raleway-font fs-1">{message}</p>
+      <p className="raleway-font fs-1">
+        {winner || draw ? messageOnEnd : message}
+      </p>
       <Button
         variant="light"
         className={clsx('button-new-game', {
