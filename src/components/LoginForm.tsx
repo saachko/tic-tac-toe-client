@@ -21,7 +21,8 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
   const connectToWebSocket = (userData: UserData) => {
     const ws = new WebSocket('ws://localhost:3001/');
     ws.onopen = () => {
-      ws.send(JSON.stringify(userData));
+      const data = { type: 'user', user: userData };
+      ws.send(JSON.stringify(data));
       setUserLoading(true);
       setCurrentUser(userData);
     };
