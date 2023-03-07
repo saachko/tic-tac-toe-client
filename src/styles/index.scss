@@ -53,3 +53,13 @@ body {
   backdrop-filter: blur(2px);
   z-index: 1100;
 }
+
+.alert-primary {
+  min-width: 285px;
+  width: 285px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  z-index: 1100;
+  font-size: 1rem;
+}
