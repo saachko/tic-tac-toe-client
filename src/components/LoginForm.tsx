@@ -58,6 +58,7 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
             placeholder="Enter your name"
             name="username"
             required
+            pattern="^(?!.*\.{3})[\s\S]*$"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formRoom">
