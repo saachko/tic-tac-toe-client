@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
@@ -49,7 +50,13 @@ function GamePage({ currentUser, users }: GamePageProps) {
     <div className="text-center">
       <h1 className="mb--1 text-primary">Room {currentUser?.room}</h1>
       <p>
-        {player1?.username} vs {player2?.username}
+        <span className={clsx({ underlined: player1?.id === currentUser?.id })}>
+          {player1?.username}
+        </span>
+        <span> vs </span>
+        <span className={clsx({ underlined: player2?.id === currentUser?.id })}>
+          {player2?.username}
+        </span>
       </p>
       <GameTable
         currentUser={currentUser}
