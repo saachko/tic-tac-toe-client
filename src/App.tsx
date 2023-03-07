@@ -22,6 +22,7 @@ function App() {
             <StartPage
               setCurrentUser={setCurrentUser}
               setUsers={setUsers}
+              currentUser={currentUser}
               users={users}
             />
           }
