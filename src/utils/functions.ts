@@ -25,4 +25,7 @@ const checkMoves = (moves: number[]) => {
   return 0;
 };
 
-export default checkMoves;
+const checkIfMovesLeft = (moves: number[]) =>
+  moves.every((value) => value !== 0);
+
+export { checkMoves, checkIfMovesLeft };

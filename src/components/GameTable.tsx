@@ -4,7 +4,7 @@ import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
 
-import checkMoves from 'utils/functions';
+import { checkIfMovesLeft, checkMoves } from 'utils/functions';
 import { SocketRawData, UserData } from 'utils/interfaces';
 
 interface GameTableProps {
@@ -17,6 +17,8 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   const [moves, setMoves] = useState<number[]>([]);
   const [nextUser, setNextUser] = useState(player1);
   const [message, setMessage] = useState('');
+  const [winner, setWinner] = useState<UserData | null>(null);
+  const [draw, setDraw] = useState(false);
 
   const selectWhoMovesNext = (id: string | undefined) => {
     if (id) {
@@ -73,10 +75,30 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   };
 
   useEffect(() => {
-    if (checkMoves(moves)) {
-      console.log('stop');
+    if (moves.length > 0) {
+      const checkingResult = checkMoves(moves);
+      if (checkingResult) {
+        setWinner(checkingResult === 1 ? player1 : player2);
+      }
+      setDraw(checkIfMovesLeft(moves));
     }
   }, [moves]);
+
+  useEffect(() => {
+    if (winner) {
+      setTimeout(() => {
+        setMessage(`${winner.username} wins`);
+      }, 0);
+    }
+  }, [winner]);
+
+  useEffect(() => {
+    if (draw) {
+      setTimeout(() => {
+        setMessage("It's a draw!");
+      }, 0);
+    }
+  }, [draw]);
 
   return (
     <>
@@ -87,7 +109,12 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
             key={v4()}
             className="cell"
             onClick={() => makeMove(index)}
-            disabled={(nextUser || player1)?.id !== currentUser?.id || !!move}
+            disabled={
+              (nextUser || player1)?.id !== currentUser?.id ||
+              !!move ||
+              !!winner ||
+              draw
+            }
           >
             {move === 1 && <GrClose />}
             {move === -1 && <FaRegCircle />}
