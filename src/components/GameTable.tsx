@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
@@ -13,6 +14,16 @@ interface GameTableProps {
 
 function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   const [moves, setMoves] = useState<number[]>([]);
+  const [nextUser, setNextUser] = useState(player1);
+  const [message, setMessage] = useState('');
+
+  const selectWhoMovesNext = (id: string | undefined) => {
+    if (id) {
+      const nextMove = id === player1?.id ? player1 : player2;
+      setNextUser(nextMove || currentUser);
+      setMessage(`${nextMove?.username || currentUser?.username} moves next`);
+    }
+  };
 
   const connectToWebSocket = (movesData: number[]) => {
     const ws = new WebSocket('ws://localhost:3001/');
@@ -21,12 +32,14 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
         player1?.id === currentUser?.id ? player2?.id : player1?.id;
       const data = { type: 'move', move: movesData, opponentId };
       ws.send(JSON.stringify(data));
+      selectWhoMovesNext(opponentId);
     };
 
     ws.onmessage = (event) => {
       const rawData: SocketRawData = JSON.parse(event.data);
       if (rawData.type === 'move' && rawData.opponentId === currentUser?.id) {
         setMoves(rawData.moves);
+        selectWhoMovesNext(rawData.opponentId);
       }
     };
   };
@@ -39,6 +52,12 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
     }
   }, []);
 
+  useEffect(() => {
+    if (player1) {
+      setMessage(`${player1?.username} moves first`);
+    }
+  }, [player1]);
+
   const makeMove = (index: number) => {
     const newTable = [...moves];
     newTable[index] = player1?.id === currentUser?.id ? 1 : -1;
@@ -47,20 +66,30 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
   };
 
   return (
-    <div className="table">
-      {moves.map((move, index) => (
-        <button
-          type="button"
-          key={v4()}
-          className="cell"
-          onClick={() => makeMove(index)}
-          disabled={!!move}
+    <>
+      <div className="table">
+        {moves.map((move, index) => (
+          <button
+            type="button"
+            key={v4()}
+            className="cell"
+            onClick={() => makeMove(index)}
+            disabled={(nextUser || player1)?.id !== currentUser?.id || !!move}
+          >
+            {move === 1 && <GrClose />}
+            {move === -1 && <FaRegCircle />}
+          </button>
+        ))}
+        <div
+          className={clsx('table-hidden raleway-font', {
+            hidden: player2?.id !== '0',
+          })}
         >
-          {move === 1 && <GrClose />}
-          {move === -1 && <FaRegCircle />}
-        </button>
-      ))}
-    </div>
+          waiting for your opponent...
+        </div>
+      </div>
+      <p className="raleway-font fs-1">{message}</p>
+    </>
   );
 }
 

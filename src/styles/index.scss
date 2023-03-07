@@ -29,6 +29,10 @@ body {
   font-size: 0.8rem;
 }
 
+.fs-1 {
+  font-size: 1rem;
+}
+
 .mb--1 {
   margin-bottom: -10px;
 }
@@ -69,11 +73,29 @@ body {
   flex-wrap: wrap;
   width: 290px;
   gap: 5px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 
   svg {
     margin-top: -5px;
     color: black;
   }
+}
+
+.table-hidden {
+  position: absolute;
+  width: 290px;
+  height: 280px;
+  z-index: 2;
+  backdrop-filter: blur(3px);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
 }
 
 .cell {
