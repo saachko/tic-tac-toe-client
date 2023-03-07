@@ -11,6 +11,7 @@ import Loader from './Loader';
 interface LoginFormProps {
   setCurrentUser: SetState<UserData | null>;
   setUsers: SetState<UserData[]>;
+  isDisabled: boolean;
 }
 
 type LoginInputs = {
@@ -18,7 +19,7 @@ type LoginInputs = {
   room: HTMLInputElement;
 };
 
-function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
+function LoginForm({ setCurrentUser, setUsers, isDisabled }: LoginFormProps) {
   const [isUserLoading, setUserLoading] = useState(false);
   const connectToWebSocket = (userData: UserData) => {
     const ws = new WebSocket(wssUrl);
@@ -64,6 +65,7 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
             name="username"
             required
             pattern="^(?!.*\.{3})[\s\S]*$"
+            disabled={isDisabled}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formRoom">
@@ -72,10 +74,16 @@ function LoginForm({ setCurrentUser, setUsers }: LoginFormProps) {
             placeholder="Unique room id"
             name="room"
             required
+            disabled={isDisabled}
           />
           <p className="raleway-font">{`*room id is a special code to join your friend's room`}</p>
         </Form.Group>
-        <Button variant="primary" type="submit" className="w-100 mt-2">
+        <Button
+          variant="primary"
+          type="submit"
+          className="w-100 mt-2"
+          disabled={isDisabled}
+        >
           Start game!
         </Button>
       </Form>

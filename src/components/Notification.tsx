@@ -14,12 +14,15 @@ function Notification({ closeNotification, isShown }: NotificationProps) {
     if (isShown) {
       setMountNotification(true);
       setTimeout(() => setMountNotification(false), 2200);
+      setTimeout(() => document.location.reload(), 2400);
     }
   }, [isShown]);
 
   useEffect(() => {
     if (!mountNotification) {
-      setTimeout(() => closeNotification(), 200);
+      setTimeout(() => {
+        closeNotification();
+      }, 200);
     }
   }, [mountNotification]);
 
@@ -36,7 +39,6 @@ function Notification({ closeNotification, isShown }: NotificationProps) {
             ref={alertRef}
             variant="primary"
             onClose={() => setMountNotification(false)}
-            dismissible
           >
             <p>
               Sorry, selected room already has both players, choose another room

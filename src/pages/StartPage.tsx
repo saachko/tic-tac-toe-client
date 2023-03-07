@@ -40,7 +40,11 @@ function StartPage({
     <div>
       <p className="mb--1 text-center">{`Let's play`}</p>
       <p className="text-center">tic-tac-toe</p>
-      <LoginForm setCurrentUser={setCurrentUser} setUsers={setUsers} />
+      <LoginForm
+        setCurrentUser={setCurrentUser}
+        setUsers={setUsers}
+        isDisabled={isNotificationShown}
+      />
       <Notification
         isShown={isNotificationShown}
         closeNotification={() => setNotificationShown(false)}
