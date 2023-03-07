@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import Notification from 'components/Notification';
 
 import LoginForm from '../components/LoginForm';
-import { UserData, UserSocketData } from '../utils/interfaces';
-import SetState from '../utils/types';
+import { UserSocketData } from '../utils/interfaces';
+import { SetState } from '../utils/types';
 
 interface StartPageProps {
-  setCurrentUser: SetState<UserData | null>;
-  currentUser: UserData | null;
+  setCurrentUser: SetState<UserSocketData | null>;
+  currentUser: UserSocketData | null;
   setUsers: SetState<UserSocketData[]>;
   users: UserSocketData[];
 }

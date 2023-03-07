@@ -3,12 +3,12 @@ import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
 
-import { UserData } from 'utils/interfaces';
+import { UserSocketData } from 'utils/interfaces';
 
 interface GameTableProps {
-  currentUser: UserData | null;
-  player1: UserData | null;
-  player2: UserData | null;
+  currentUser: UserSocketData | null;
+  player1: UserSocketData | null;
+  player2: UserSocketData | null;
 }
 
 function GameTable({ currentUser, player1, player2 }: GameTableProps) {

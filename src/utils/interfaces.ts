@@ -1,3 +1,5 @@
+import { DataType } from './types';
+
 interface UserData {
   id: string;
   username: string;
@@ -13,4 +15,10 @@ interface MoveData {
   moves: number[];
 }
 
-export type { UserData, UserSocketData, MoveData };
+interface SocketRawData {
+  type: DataType;
+  users: UserSocketData[];
+  moves: number[];
+}
+
+export type { UserData, UserSocketData, MoveData, SocketRawData };

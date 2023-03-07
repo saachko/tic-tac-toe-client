@@ -3,14 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 
 import Loader from 'components/Loader';
 
-import { UserData, UserSocketData } from './utils/interfaces';
+import { UserSocketData } from './utils/interfaces';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 const GamePage = lazy(() => import('./pages/GamePage'));
 const StartPage = lazy(() => import('./pages/StartPage'));
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
+  const [currentUser, setCurrentUser] = useState<UserSocketData | null>(null);
   const [users, setUsers] = useState<UserSocketData[]>([]);
 
   return (
