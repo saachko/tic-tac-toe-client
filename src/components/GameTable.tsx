@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
+import Button from 'react-bootstrap/esm/Button';
 import { FaRegCircle } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { v4 } from 'uuid';
@@ -135,6 +136,15 @@ function GameTable({ currentUser, player1, player2 }: GameTableProps) {
         </div>
       </div>
       <p className="raleway-font fs-1">{message}</p>
+      <Button
+        variant="light"
+        className={clsx('button-new-game', {
+          hidden: !winner && !draw,
+        })}
+        onClick={() => document.location.reload()}
+      >
+        new game
+      </Button>
       <div
         className={clsx('background', {
           win: winner && winner.id === currentUser?.id,
