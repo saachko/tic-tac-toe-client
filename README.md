@@ -14,6 +14,10 @@
 
 At the start user just enters its name as well as a room number which is a unique code to connect directly to your opponent's game session. Only 2 players can be in the room, but many games can take place at the same time (in different rooms). 
 
+<img width="1440" alt="Снимок экрана 2023-03-08 в 03 38 37" src="https://user-images.githubusercontent.com/95384801/223588944-54caeca6-237b-4a1a-a3c2-ea3dbe13cd51.png">
+
+<img width="1440" alt="Снимок экрана 2023-03-08 в 03 38 48" src="https://user-images.githubusercontent.com/95384801/223588958-bcc4fbf1-f8a4-4712-8443-3caf91803b76.png">
+
 ## Stack:
 
 - react
