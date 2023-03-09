@@ -1,0 +1,142 @@
+@import '~bootstrap/scss/bootstrap';
+@import './animations';
+
+* {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+body {
+  margin: 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  h1 {
+    font-weight: bold;
+    font-size: 3.3rem;
+  }
+}
+
+html[data-end='true'] {
+  body,
+  .text-primary {
+    color: white !important;
+  }
+}
+
+.raleway-font {
+  font-family: 'Raleway Dots', cursive;
+  font-size: 0.8rem;
+}
+
+.fs-1 {
+  font-size: 1rem;
+}
+
+.mb--1 {
+  margin-bottom: -10px;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.loader {
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin: -2rem 0 0 -2rem;
+}
+
+.loader-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(2px);
+  z-index: 1100;
+}
+
+.alert-primary {
+  min-width: 285px;
+  width: 285px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  z-index: 1100;
+  font-size: 1rem;
+}
+
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  width: 290px;
+  gap: 5px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+
+  svg {
+    margin-top: -5px;
+    color: black;
+  }
+}
+
+.table-hidden {
+  position: absolute;
+  width: 290px;
+  height: 280px;
+  z-index: 2;
+  backdrop-filter: blur(3px);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.cell {
+  width: 90px;
+  height: 90px;
+  border: none;
+  transition: 0.2s all ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:disabled {
+    opacity: 1;
+  }
+}
+
+.background {
+  position: fixed;
+  z-index: -5;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.button-new-game {
+  position: fixed;
+  width: 120px;
+  margin-left: -60px;
+}
